@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
@@ -11,7 +12,8 @@ connectDB();
 
 const app = express();
 
-app.use(cors({ origin: process.env.CLIENT_URL || 'http://localhost:5173', credentials: true }));
+const allowedOrigins = [process.env.CLIENT_URL, process.env.RENDER_EXTERNAL_URL].filter(Boolean);
+app.use(cors({ origin: allowedOrigins.length ? allowedOrigins : 'http://localhost:5173', credentials: true }));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -32,6 +34,16 @@ app.use('/api/payments', require('./routes/paymentRoutes'));
 app.use('/api/dashboard', require('./routes/dashboardRoutes'));
 
 app.get('/api/health', (req, res) => res.json({ status: 'OK', timestamp: new Date() }));
+
+// Serve the built frontend when deploying as a single service (Render)
+const clientBuild = path.join(__dirname, '..', 'frontend', 'dist');
+if (fs.existsSync(path.join(clientBuild, 'index.html'))) {
+  app.use(express.static(clientBuild));
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api') || req.path.startsWith('/uploads')) return next();
+    res.sendFile(path.join(clientBuild, 'index.html'));
+  });
+}
 
 app.use(errorHandler);
 
