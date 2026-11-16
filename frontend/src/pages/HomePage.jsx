@@ -106,7 +106,7 @@ export default function HomePage() {
   };
 
   const sectionHeader = (eyebrow, title, linkText, linkTo) => (
-    <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
+    <div className="animate-fade-up flex flex-wrap items-end justify-between gap-4 mb-8">
       <div>
         <p className="section-eyebrow mb-2">{eyebrow}</p>
         <h2 className="section-title">{title}</h2>
@@ -126,12 +126,12 @@ export default function HomePage() {
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center py-12 md:py-16 lg:py-20">
             {/* Left: content */}
-            <div className="relative w-full rounded-2xl overflow-hidden shadow-[0_20px_50px_-24px_rgba(6,16,31,0.45)]">
+            <div className="relative w-full rounded-2xl overflow-hidden shadow-[0_20px_50px_-24px_rgba(6,16,31,0.45)] animate-fade-up">
               <img
                 src={shopImg}
                 alt=""
                 aria-hidden="true"
-                className="absolute inset-0 w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full object-cover animate-zoom-soft"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-navy-950/95 via-navy-950/85 to-navy-950/60" aria-hidden="true" />
               <div className="relative p-6 sm:p-8 lg:p-10">
@@ -167,7 +167,7 @@ export default function HomePage() {
             {/* Right: product arrangement */}
             <div className="relative">
               <div className="absolute inset-4 sm:inset-6 lg:inset-8 bg-navy-900 rounded-[28px] texture-stripes" aria-hidden="true" />
-              <div className="relative grid grid-cols-3 gap-2.5 sm:gap-3 p-4 sm:p-6">
+              <div className="relative grid grid-cols-3 gap-2.5 sm:gap-3 p-4 sm:p-6 stagger">
                 {collage.length >= 4 ? (
                   collage.map((p, i) => (
                     <Link
@@ -192,7 +192,7 @@ export default function HomePage() {
                 )}
               </div>
               {/* Floating badge */}
-              <div className="absolute -bottom-4 left-4 sm:left-8 bg-white rounded-xl shadow-[0_16px_40px_-12px_rgba(6,16,31,0.3)] border border-navy-100 px-4 py-3 flex items-center gap-3">
+              <div className="absolute -bottom-4 left-4 sm:left-8 bg-white rounded-xl shadow-[0_16px_40px_-12px_rgba(6,16,31,0.3)] border border-navy-100 px-4 py-3 flex items-center gap-3 animate-float-soft">
                 <img src={logoImg} alt="" className="w-9 h-9 object-contain" />
                 <div className="leading-tight">
                   <p className="font-display font-bold text-navy-900 text-sm">Under One Roof</p>
@@ -207,7 +207,7 @@ export default function HomePage() {
       {/* ======================= TRUST STRIP ======================= */}
       <section className="bg-white border-y border-navy-100">
         <div className="container-custom">
-          <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-y lg:divide-y-0 divide-navy-100">
+          <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-y lg:divide-y-0 divide-navy-100 stagger">
             {[
               { icon: <FiShield size={22} />, title: 'Quality Products', desc: 'Genuine products from trusted brands' },
               { icon: <FiCheckCircle size={22} />, title: 'Reliable Service', desc: 'Support before and after your purchase' },
@@ -230,7 +230,7 @@ export default function HomePage() {
       <section className="py-16 md:py-20">
         <div className="container-custom">
           {sectionHeader('Shop by category', 'Everything, From Wires to Pipes', 'Browse All Products', '/products')}
-          <div className="grid lg:grid-cols-2 gap-6">
+          <div className="grid lg:grid-cols-2 gap-6 stagger">
             <CategoryPanel cat={electrical} slug="electrical" accent="border-brand-500" stats={categoryStats.electrical} />
             <CategoryPanel cat={hardware} slug="hardware" accent="border-navy-800" stats={categoryStats.hardware} />
           </div>
@@ -246,7 +246,7 @@ export default function HomePage() {
             <section className="py-16 md:py-20 bg-white border-y border-navy-100">
               <div className="container-custom">
                 {sectionHeader('Handpicked for you', 'Featured Products', 'View All Featured', '/products?featured=true')}
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5 stagger">
                   {featured.map(p => <ProductCard key={p._id} product={p} />)}
                 </div>
               </div>
@@ -257,7 +257,7 @@ export default function HomePage() {
             <section className="py-16 md:py-20">
               <div className="container-custom">
                 {sectionHeader('Customer favourites', 'Best Sellers', 'View All Best Sellers', '/products?bestseller=true')}
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5 stagger">
                   {bestSellers.map(p => <ProductCard key={p._id} product={p} />)}
                 </div>
               </div>
@@ -268,7 +268,7 @@ export default function HomePage() {
             <section className="py-16 md:py-20 bg-white border-y border-navy-100">
               <div className="container-custom">
                 {sectionHeader('Just stocked', 'New Arrivals', 'View All New Arrivals', '/products?new=true')}
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5 stagger">
                   {newArrivals.map(p => <ProductCard key={p._id} product={p} />)}
                 </div>
               </div>
@@ -280,7 +280,7 @@ export default function HomePage() {
       {/* ======================= EXPERT HELP BAND ======================= */}
       <section className="bg-navy-900 texture-stripes">
         <div className="container-custom py-14 md:py-16">
-          <div className="grid lg:grid-cols-[1.4fr_1fr] gap-10 items-center">
+          <div className="grid lg:grid-cols-[1.4fr_1fr] gap-10 items-center stagger">
             <div>
               <p className="section-eyebrow text-brand-400 mb-3">Need help choosing?</p>
               <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-extrabold text-white mb-4 tracking-tight">
@@ -323,7 +323,7 @@ export default function HomePage() {
       {/* ======================= ABOUT ======================= */}
       <section id="about" className="py-16 md:py-20 scroll-mt-24">
         <div className="container-custom">
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center stagger">
             <div className="relative">
               <div className="rounded-2xl overflow-hidden shadow-[0_20px_50px_-20px_rgba(6,16,31,0.35)] border border-navy-100">
                 <img src={shopImg} alt="OM Electrical & Hardware shop" className="w-full h-[320px] md:h-[420px] object-cover" />
@@ -372,7 +372,7 @@ export default function HomePage() {
       <section className="py-16 md:py-20 bg-white border-t border-navy-100">
         <div className="container-custom">
           {sectionHeader('Find us', 'Visit OM Electrical & Hardware', null, null)}
-          <div className="grid lg:grid-cols-3 gap-6">
+          <div className="grid lg:grid-cols-3 gap-6 stagger">
             {/* Details */}
             <div className="card p-6">
               <h3 className="font-display font-bold text-lg text-ink mb-5">Shop Details</h3>

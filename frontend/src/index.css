@@ -165,6 +165,41 @@
 ::-webkit-scrollbar-thumb { background: var(--color-navy-700); border-radius: 6px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--color-navy-600); }
 
+/* ---------- Motion ---------- */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes float-soft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes zoom-soft {
+  from { transform: scale(1.08); }
+  to { transform: scale(1); }
+}
+
+@layer utilities {
+  .animate-fade-up { animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) backwards; }
+  .animate-fade-in { animation: fade-in 0.8s ease-out backwards; }
+  .animate-float-soft { animation: float-soft 5s ease-in-out infinite; }
+  .animate-zoom-soft { animation: zoom-soft 12s ease-out backwards; }
+
+  .stagger > * { animation: fade-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) backwards; }
+  .stagger > *:nth-child(1) { animation-delay: 0.06s; }
+  .stagger > *:nth-child(2) { animation-delay: 0.14s; }
+  .stagger > *:nth-child(3) { animation-delay: 0.22s; }
+  .stagger > *:nth-child(4) { animation-delay: 0.3s; }
+  .stagger > *:nth-child(5) { animation-delay: 0.38s; }
+  .stagger > *:nth-child(6) { animation-delay: 0.46s; }
+  .stagger > *:nth-child(7) { animation-delay: 0.54s; }
+  .stagger > *:nth-child(8) { animation-delay: 0.62s; }
+}
+
 /* ---------- Dark theme utility remaps ---------- */
 @layer utilities {
   .bg-white { background-color: var(--color-navy-900) !important; }
